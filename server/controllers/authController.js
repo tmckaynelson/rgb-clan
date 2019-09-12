@@ -14,7 +14,16 @@ const login = async (req, res) => {
         return res.status(404).send(errorMessage)
     }
 
-    
+    if (!bcrypt.compareSync(password, foundUser[0].password)) {
+        return res.status(404).send(errorMessage)
+    }
+
+    delete foundUser[0].password
+    delete foundUser[0].active
+
+    req.session.user = foundUser[0]
+
+    res.status(200).send(foundUser[0])
 }
 
 const register = async (req, res) => {

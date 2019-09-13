@@ -7,6 +7,7 @@ const session = require('express-session')
 
 // controllers
 const authCtrl = require('./controllers/authController')
+const postCtrl = require('./controllers/postController')
 
 const {
     SERVER_PORT,
@@ -45,6 +46,12 @@ app.delete('/auth/logout', authCtrl.logout)
 app.post('/auth/register', authCtrl.register)
 app.put('/auth/edit-account', authCtrl.edit)
 app.delete('/auth/delete-account', authCtrl.deleteAccount)
+
+// post endpoints
+app.post('/api/posts', postCtrl.createPost)
+app.get('/api/posts', postCtrl.getPosts)
+app.get('/api/posts/:id', postCtrl.getPost)
+app.get()
 
 // set up app to listen
 app.listen(SERVER_PORT, () => {

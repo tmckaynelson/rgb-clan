@@ -28,7 +28,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
 
-    const { username, password, first_name, last_name } = req.body
+    const { username, password, first_name, last_name, email } = req.body
     const db = req.app.get('db')
 
     const foundUser = await db.get_user([username])
@@ -40,21 +40,46 @@ const register = async (req, res) => {
     let salt = bcrypt.genSaltSync(13)
     let hashPass = bcrypt.hashSync(password, salt)
 
-    const newUser = await db.register([username, hashPass, first_name, last_name])
+    const newUser = await db.register([username, hashPass, first_name, last_name, email])
 
     return res.status(200).send(newUser[0])
 }
 
 const deleteAccount = async (req, res) => {
     console.log('hit delete account')
+
+    // const { username, password } = req.body
+    // const db = req.app.get('db')
+
+    // const foundUser = await db.get_user([username])
+
+    // if(!foundUser[0]) {
+    //     return res.status(404).send('Error deleting account')
+    // }
 }
 
-const logout = async (req, res) => {
+const logout = (req, res) => {
     console.log('hit logout')
+
+    req.session.destroy()
 }
 
 const edit = async (req, res) => {
     console.log('hit edit')
+
+    // const { username, password, first_name, last_name, email }
+    // const db = req.app.get('db')
+
+    // const foundUser = await db.get_user([username])
+
+    // if(!foundUser[0]) {
+    //     return res.status(404).send('Error editing profile')
+    // }
+
+    // if(password) {
+
+    // }
+    
 }
 
 

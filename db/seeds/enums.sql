@@ -1,6 +1,7 @@
 CREATE TYPE post_type AS ENUM (
     'review',
-    'add_game'
+    'add_game',
+    'posts'
 );
 
 CREATE TYPE add_location AS ENUM (

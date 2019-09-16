@@ -49,9 +49,11 @@ app.delete('/auth/delete-account', authCtrl.deleteAccount)
 
 // post endpoints
 app.post('/api/posts', postCtrl.createPost)
-app.get('/api/posts', postCtrl.getPosts)
+app.get('/api/posts/search', postCtrl.searchPosts)
 app.get('/api/posts/:id', postCtrl.getPost)
-app.get()
+app.get('/api/posts', postCtrl.getPosts)
+app.put('/api/posts/:id', postCtrl.editPost)
+app.delete('/api/posts/:id', postCtrl.deletePost)
 
 // set up app to listen
 app.listen(SERVER_PORT, () => {

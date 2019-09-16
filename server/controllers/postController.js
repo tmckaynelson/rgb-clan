@@ -42,26 +42,34 @@ const getPostsProfile = async (req, res) => {
     res.status(200).send(posts)
 }
 
-const getPost = (req, res) => {
+const getPost = async (req, res) => {
+    /*
+    TODO test
+    */
     console.log('hit get post')
 
-    axios({
-        url: "https://api-v3.igdb.com/games",
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'user-key': '176d09a31b52b2b83700b8837e12f39b'
-        },
-        data: 'fields *; where id = 1942;'
-      })
-        .then(response => {
-            res.status(200).send(response.data);
-        })
-        .catch(err => {
-            console.error(err);
-        });
+    const db = req.app.get('db')
+    const id = req.params
 
-    
+    const post = await db.get_post([id])
+
+    res.status(200).send(post[0])
+
+    // axios({
+    //     url: "https://api-v3.igdb.com/games",
+    //     method: 'POST',
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'user-key': '176d09a31b52b2b83700b8837e12f39b'
+    //     },
+    //     data: 'fields *; where id = 1942;'
+    //   })
+    //     .then(response => {
+    //         res.status(200).send(response.data);
+    //     })
+    //     .catch(err => {
+    //         console.error(err);
+    //     });
 }
 
 const searchPosts = (req, res) => {
@@ -70,13 +78,13 @@ const searchPosts = (req, res) => {
     res.status(200).send()
 }
 
-const editPost = (req, res) => {
+const editPost = async (req, res) => {
     console.log('hit edit post')
 
     res.status(200).send()
 }
 
-const deletePost = (req, res) => {
+const deletePost = async (req, res) => {
     console.log('hit delete post')
 
     res.status(200).send()

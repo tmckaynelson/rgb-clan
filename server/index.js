@@ -44,14 +44,15 @@ massive(CONNECTION_STRING)
 app.post('/auth/login', authCtrl.login)
 app.delete('/auth/logout', authCtrl.logout)
 app.post('/auth/register', authCtrl.register)
-app.put('/auth/edit-account', authCtrl.edit)
+app.put('/auth/edit-account/:id', authCtrl.edit)
 app.delete('/auth/delete-account', authCtrl.deleteAccount)
 
 // post endpoints
 app.post('/api/posts', postCtrl.createPost)
 app.get('/api/posts/search', postCtrl.searchPosts)
-app.get('/api/posts/:id', postCtrl.getPost)
-app.get('/api/posts', postCtrl.getPosts)
+app.get('/api/posts/single/:id', postCtrl.getPost)
+app.get('/api/posts', postCtrl.getPostsHome)
+app.get('/api/posts/:id', postCtrl.getPostsProfile)
 app.put('/api/posts/:id', postCtrl.editPost)
 app.delete('/api/posts/:id', postCtrl.deletePost)
 

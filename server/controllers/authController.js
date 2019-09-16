@@ -67,19 +67,37 @@ const logout = (req, res) => {
 const edit = async (req, res) => {
     console.log('hit edit')
 
-    // const { username, password, first_name, last_name, email }
-    // const db = req.app.get('db')
+    const errorMessage = 'Error editing profile'
+    const { username, password, first_name, last_name, email } = req.body
+    const { id } = req.params
+    const db = req.app.get('db')
 
-    // const foundUser = await db.get_user([username])
+    const foundUser = await db.get_user([username])
+    console.log(foundUser)
 
-    // if(!foundUser[0]) {
-    //     return res.status(404).send('Error editing profile')
-    // }
+    if(!foundUser[0]) {
+        console.log('found user error')
+        return res.status(404).send(errorMessage)
+    }
 
-    // if(password) {
+    if(!bcrypt.compareSync(password, foundUser[0].password)) {
+        console.log('auth error')
+        return res.status.send(409).send(errorMessage)
+    }
 
-    // }
-    
+    const editUser = await db.edit_user([first_name, last_name, email, id])
+    console.log('edit',editUser)
+
+    req.session.user = {
+        user_id: id,
+        username,
+        first_name,
+        last_name,
+        email
+    }
+    console.log(req.session)
+
+    res.status(200).send(editUser[0])
 }
 
 

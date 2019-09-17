@@ -64,3 +64,8 @@ CREATE TABLE want_to_play (
     user_id INTEGER REFERENCES users(user_id) NOT NULL,
     game_id INTEGER NOT NULL
 );
+
+INSERT INTO users
+(username, password, first_name, last_name, email)
+VALUES
+('karcaroth', '$2a$13$brbMuhFEtA7Cagc/GAfqu.lKuzAOpOnMjKUhay41DdD6fwObmOII2', 'McKay', 'Nelson', 'tmckaynelson@gmail.com');

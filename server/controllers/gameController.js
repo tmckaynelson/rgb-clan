@@ -1,5 +1,4 @@
 const createGame = async (req, res) => {
-    console.log('hit create game')
 
     const db = req.app.get('db')
     const { game_id, user_id, location } = req.body
@@ -50,12 +49,10 @@ const createGame = async (req, res) => {
 }
 
 const getGames = async (req, res) => {
-    console.log('hit get games')
 
     const db = req.app.get('db')
     const { user_id } = req.params
     const { list } = req.query
-    console.log(list, user_id)
     let games
 
     switch(list) {
@@ -79,7 +76,6 @@ const getGames = async (req, res) => {
 }
 
 const deleteGame = async (req, res) => {
-    console.log('hit delete game')
 
     const db = req.app.get('db')
     const { user_id } = req.params
@@ -87,7 +83,6 @@ const deleteGame = async (req, res) => {
     const errorMessage = 'Error removing game from list'
     const successMessage = 'Game removed from list successfully'
 
-    console.log(user_id, list, id)
     try {
         switch(list) {
             case 'played':

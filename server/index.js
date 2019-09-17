@@ -9,6 +9,7 @@ const session = require('express-session')
 const authCtrl = require('./controllers/authController')
 const postCtrl = require('./controllers/postController')
 const gameCtrl = require('./controllers/gameController')
+const friendCtrl = require('./controllers/friendController')
 
 const {
     SERVER_PORT,
@@ -60,7 +61,12 @@ app.delete('/api/posts/:id', postCtrl.deletePost)
 // game endpoints
 app.post('/api/game', gameCtrl.createGame)
 app.get('/api/game/:user_id', gameCtrl.getGames)
-app.delete('/api/game/:user_id', gameCtrl.deleteGame)
+app.delete('/api/game/:ukkkser_id', gameCtrl.deleteGame)
+
+// friend endpoints
+app.post('/api/friend', friendCtrl.addFriend)
+app.get('/api/friend/:user_id', friendCtrl.getFriends)
+app.delete('/api/friend/:user_id', friendCtrl.deleteFriend)
 
 // set up app to listen
 app.listen(SERVER_PORT, () => {

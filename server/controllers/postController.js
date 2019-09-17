@@ -3,7 +3,6 @@ const createPost = (req, res) => {
     /*
     TODO test
     */
-    console.log('hit create post')
 
     const { user_id, type, title, content, game_id, location, review_id } = req.body
     const db = req.app.get('db')
@@ -17,7 +16,6 @@ const getPostsHome = async (req, res) => {
 /*
     TODO test
     */
-       console.log('hit get posts home')
 
     const db = req.app.get('db')
     const id = req.session.user.id
@@ -32,7 +30,6 @@ const getPostsProfile = async (req, res) => {
     /*
     TODO test
     */
-    console.log('hit get posts profile')
 
     const db = req.app.get('db')
     const { id } = req.params
@@ -46,7 +43,6 @@ const getPost = async (req, res) => {
     /*
     TODO test
     */
-    console.log('hit get post')
 
     const db = req.app.get('db')
     const id = req.params
@@ -73,19 +69,16 @@ const getPost = async (req, res) => {
 }
 
 const searchPosts = (req, res) => {
-    console.log('hit search posts')
 
     res.status(200).send()
 }
 
 const editPost = async (req, res) => {
-    console.log('hit edit post')
 
     res.status(200).send()
 }
 
 const deletePost = async (req, res) => {
-    console.log('hit delete post')
 
     res.status(200).send()
 }

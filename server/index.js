@@ -8,6 +8,7 @@ const session = require('express-session')
 // controllers
 const authCtrl = require('./controllers/authController')
 const postCtrl = require('./controllers/postController')
+const gameCtrl = require('./controllers/gameController')
 
 const {
     SERVER_PORT,
@@ -55,6 +56,11 @@ app.get('/api/posts', postCtrl.getPostsHome)
 app.get('/api/posts/:id', postCtrl.getPostsProfile)
 app.put('/api/posts/:id', postCtrl.editPost)
 app.delete('/api/posts/:id', postCtrl.deletePost)
+
+// game endpoints
+app.post('/api/game', gameCtrl.createGame)
+app.get('/api/game/:user_id', gameCtrl.getGames)
+app.delete('/api/game/:user_id', gameCtrl.deleteGame)
 
 // set up app to listen
 app.listen(SERVER_PORT, () => {

@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import Post from './Post'
 
 class Dashboard extends Component {
     render() {
         return (
             <div>
-                Dashboard
+                <Post />
+                <Post />
+                <Post />
+                <Post />
             </div>
         )
     }

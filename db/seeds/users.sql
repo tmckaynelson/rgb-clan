@@ -5,5 +5,6 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL,
-    active BOOLEAN NOT NULL DEFAULT true
+    active BOOLEAN NOT NULL DEFAULT true,
+    profile_pic text
 );

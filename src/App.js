@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 import 'reset-css'
+
+import { addUser } from './redux/reducer'
 
 import Nav from './components/Nav'
 import Profile from './components/Profile'
@@ -15,8 +18,7 @@ class App extends Component {
       <div>
         <Nav />
         <Switch>
-          <Route exact path={["/", "/login"]} component={ Login } />
-          
+          <Route exact path={["/", "/login"]} render={ () => (<Login addUser={ this.props.addUser } />) } />
           <Route path="/register" component={ Register } />
           <Route path="/home" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
@@ -26,4 +28,8 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return state
+}
+
+export default connect(mapStateToProps, { addUser })(App)

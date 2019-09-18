@@ -10,11 +10,11 @@ const login = async (req, res) => {
     const foundUser = await db.get_user([username])
 
     if (!foundUser[0]) {
-        return res.status(404).send(errorMessage)
+        return res.status(401).send({errorMessage})
     }
 
     if (!bcrypt.compareSync(password, foundUser[0].password)) {
-        return res.status(404).send(errorMessage)
+        return res.status(401).send({errorMessage})
     }
 
     delete foundUser[0].password
@@ -22,7 +22,7 @@ const login = async (req, res) => {
 
     req.session.user = foundUser[0]
 
-    res.status(200).send(foundUser[0])
+    res.status(200).send(foundUser[0].username)
 }
 
 const register = async (req, res) => {

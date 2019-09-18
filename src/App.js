@@ -10,6 +10,7 @@ import Profile from './components/Profile'
 import Dashboard from './components/Dashboard'
 import Register from './components/Register'
 import Login from './components/Login'
+import Game from './components/Game'
 
 class App extends Component {
 
@@ -18,18 +19,17 @@ class App extends Component {
       <div>
         <Nav />
         <Switch>
-          <Route exact path={["/", "/login"]} render={ () => (<Login addUser={ this.props.addUser } />) } />
+          <Route exact path={["/", "/login"]} component={ Login } />
           <Route path="/register" component={ Register } />
           <Route path="/home" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
+          <Route path="/game/:id" component={ Game } />
         </Switch>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return state
-}
 
-export default connect(mapStateToProps, { addUser })(App)
+
+export default App

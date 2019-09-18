@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { addUser } from '../redux/reducer'
 import axios from 'axios'
 
 import './Login.css'
@@ -27,9 +29,10 @@ class Login extends Component {
             .then( response => {
                 console.log(response)
                 this.props.addUser(response.data)
+                this.props.history.push('/home')
             })
             .catch( error => {
-
+                console.log(error.errorMessage)
             })
     }
 
@@ -48,4 +51,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default connect(null, { addUser })(Login)

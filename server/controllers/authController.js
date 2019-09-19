@@ -22,7 +22,7 @@ const login = async (req, res) => {
 
     req.session.user = foundUser[0]
 
-    res.status(200).send(foundUser[0].username)
+    res.status(200).send(foundUser[0])
 }
 
 const register = async (req, res) => {
@@ -60,6 +60,7 @@ const deleteAccount = async (req, res) => {
 const logout = (req, res) => {
 
     req.session.destroy()
+    res.status(200).send('User logged out')
 }
 
 const edit = async (req, res) => {

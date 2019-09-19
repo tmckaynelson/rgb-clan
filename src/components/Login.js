@@ -5,6 +5,7 @@ import { addUser } from '../redux/reducer'
 import axios from 'axios'
 
 import './Login.css'
+import Nav from './Nav'
 
 class Login extends Component {
 
@@ -23,11 +24,16 @@ class Login extends Component {
         })
     }
 
-    login = () => {
+    login = (event) => {
+
+        event.preventDefault()
 
         axios.post('/auth/login', this.state)
             .then( response => {
-                console.log(response)
+                this.setState({
+                    username: '',
+                    password: ''
+                })
                 this.props.addUser(response.data)
                 this.props.history.push('/home')
             })
@@ -37,16 +43,20 @@ class Login extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
-            <div className="login">
-                <label>Username</label>
-                <input type="text" onChange={ this.handleChange } name="username" value={ this.state.username } />
-                <label>Password</label>
-                <input type="password" onChange={ this.handleChange } name="password" value={ this.state.password } />
-                <button onClick={ this.login }>Login</button>
-                <Link to="/register">Sign Up</Link>
+            <>
+            <Nav />
+            <div>
+                <form className="login">
+                    <label>Username</label>
+                    <input type="text" onChange={ this.handleChange } name="username" value={ this.state.username } />
+                    <label>Password</label>
+                    <input type="password" onChange={ this.handleChange } name="password" value={ this.state.password } />
+                    <button onClick={ this.login }>Login</button>
+                    <Link to="/register">Sign Up</Link>
+                </form>
             </div>
+            </>
         )
     }
 }

@@ -10,6 +10,7 @@ const authCtrl = require('./controllers/authController')
 const postCtrl = require('./controllers/postController')
 const gameCtrl = require('./controllers/gameController')
 const friendCtrl = require('./controllers/friendController')
+const profileCtrl = require('./controllers/profileController')
 
 const {
     SERVER_PORT,
@@ -46,7 +47,6 @@ massive(CONNECTION_STRING)
 app.post('/auth/login', authCtrl.login)
 app.delete('/auth/logout', authCtrl.logout)
 app.post('/auth/register', authCtrl.register)
-app.put('/auth/edit-account/:id', authCtrl.edit)
 app.delete('/auth/delete-account', authCtrl.deleteAccount)
 
 // post endpoints
@@ -61,12 +61,15 @@ app.delete('/api/posts/:id', postCtrl.deletePost)
 // game endpoints
 app.post('/api/game', gameCtrl.createGame)
 app.get('/api/game/:user_id', gameCtrl.getGames)
-app.delete('/api/game/:ukkkser_id', gameCtrl.deleteGame)
+app.delete('/api/game/:user_id', gameCtrl.deleteGame)
 
 // friend endpoints
 app.post('/api/friend', friendCtrl.addFriend)
 app.get('/api/friend/:user_id', friendCtrl.getFriends)
 app.delete('/api/friend/:user_id', friendCtrl.deleteFriend)
+
+// profile endpoints
+app.put('/api/profile/edit/:id', profileCtrl.edit)
 
 // set up app to listen
 app.listen(SERVER_PORT, () => {

@@ -38,7 +38,7 @@ CREATE TABLE posts (
     content TEXT,
     game_id INTEGER NOT NULL,
     location add_location,
-    review_id INTEGER REFERENCES reviews(review_id) NOT NULL
+    review_id INTEGER REFERENCES reviews(review_id)
 );
 
 CREATE TABLE owned (

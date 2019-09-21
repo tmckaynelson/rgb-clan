@@ -2,6 +2,7 @@ const createGame = async (req, res) => {
 
     const db = req.app.get('db')
     const { game_id, user_id, location } = req.body
+    console.log(game_id, user_id, location)
     let addGame
     let foundGame
 
@@ -43,8 +44,6 @@ const createGame = async (req, res) => {
             return res.status(404).send('Error adding game')
     }
     return res.status(200).send(addGame[0])
-
-    res.status(200).send(addGame[0])
 
 }
 

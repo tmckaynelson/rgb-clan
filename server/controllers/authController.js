@@ -38,8 +38,9 @@ const register = async (req, res) => {
 
     let salt = bcrypt.genSaltSync(13)
     let hashPass = bcrypt.hashSync(password, salt)
+    let profile = `https://robohash.org/${Math.floor(Math.random() * 1000)}`
 
-    const newUser = await db.register([username, hashPass, first_name, last_name, email])
+    const newUser = await db.register([username, hashPass, first_name, last_name, email, profile])
 
     return res.status(200).send(newUser[0])
 }
@@ -63,35 +64,7 @@ const logout = (req, res) => {
     res.status(200).send('User logged out')
 }
 
-const edit = async (req, res) => {
 
-    const errorMessage = 'Error editing profile'
-    const { username, password, first_name, last_name, email } = req.body
-    const { id } = req.params
-    const db = req.app.get('db')
-
-    const foundUser = await db.get_user([username])
-
-    if(!foundUser[0]) {
-        return res.status(404).send(errorMessage)
-    }
-
-    if(!bcrypt.compareSync(password, foundUser[0].password)) {
-        return res.status.send(409).send(errorMessage)
-    }
-
-    const editUser = await db.edit_user([first_name, last_name, email, id])
-
-    req.session.user = {
-        user_id: id,
-        username,
-        first_name,
-        last_name,
-        email
-    }
-
-    res.status(200).send(editUser[0])
-}
 
 
 module.exports = {
@@ -99,5 +72,4 @@ module.exports = {
     register,
     deleteAccount,
     logout,
-    edit
 }

@@ -6,8 +6,6 @@ import Profile from './components/Profile'
 import Dashboard from './components/Dashboard'
 import Register from './components/Register'
 import Login from './components/Login'
-import Game from './components/Game'
-import Nav from './components/Nav'
 
 class App extends Component {
 

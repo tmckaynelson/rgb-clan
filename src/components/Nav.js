@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-import { removeUser } from '../redux/reducer'
+import { removeUser, updateSearch } from '../redux/reducer'
 
 import './Nav.css'
 
@@ -15,7 +15,8 @@ class Nav extends Component {
 
         this.state = {
             sidebar: false,
-            searchbar: false
+            searchbar: false,
+            search: ''
         }
     }
 
@@ -47,6 +48,40 @@ class Nav extends Component {
             })
     }
 
+    search = (event) => {
+
+        event.preventDefault()
+        
+        axios({
+            url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'user-key': '176d09a31b52b2b83700b8837e12f39b'
+            },
+            data: `fields id; search "${this.state.search}"; limit 50;`
+          })
+            .then(response => {
+                let data = response.data.map( game => game.id)
+                this.props.updateSearch(data)
+                this.props.history.push('/search')
+            })
+            .catch(err => {
+                console.error(err);
+            });
+
+        this.setState({
+            search: '',
+            searchbar: false
+        })
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
     render() {
         return (
             <>
@@ -55,7 +90,7 @@ class Nav extends Component {
                     this.state.sidebar ? 
                     <div className="sidebar">
                         <Link to="/home" onClick={ this.toggleMenu } >Home</Link>
-                        <Link to="/profile" onClick={ this.toggleMenu } >Profile</Link>
+                        <Link to={`/profile/${this.props.username}`} onClick={ this.toggleMenu } >Profile</Link>
                         <button onClick={ this.logout }>Logout</button>
                     </div>
                     :
@@ -68,7 +103,7 @@ class Nav extends Component {
                     :
                     null
                 }
-                <h1 className="title">RGBclan</h1>
+                <h1 className="title">Game Tracker</h1>
                 {
                     this.props.username ? 
                     
@@ -79,9 +114,10 @@ class Nav extends Component {
             </div>
             {
                     this.state.searchbar ?
-                    <form className="searchbar">
-                        <input type="text" /><Search className="search" />
-                    </form>
+                    <div className="searchbar">
+                        <input type="text" name="search" value={ this.state.search } onChange={ this.handleChange } />
+                        <Search onClick={ this.search } className="search" />
+                    </div>
                     :
                     null
             }
@@ -94,4 +130,4 @@ function mapStateToProps(state) {
     return state
 }
 
-export default withRouter(connect(mapStateToProps, { removeUser })(Nav))
+export default withRouter(connect(mapStateToProps, { removeUser, updateSearch })(Nav))

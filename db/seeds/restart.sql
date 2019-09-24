@@ -2,9 +2,9 @@ drop table if exists played;
 drop table if exists owned;
 drop table if exists want_to_own;
 drop table if exists want_to_play;
-drop table if exists reviews;
 drop table if exists friends;
 drop table if exists posts;
+drop table if exists reviews;
 drop table if exists users;
 
 CREATE TABLE users (

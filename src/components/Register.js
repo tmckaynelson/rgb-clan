@@ -66,10 +66,10 @@ class Register extends Component {
             <>
             <Nav />
             <div className="register">
-                <form className="register">
+                <form className="login">
                     <label>Username</label>
                     <input type="text" name="username" value={ this.state.username } onChange={ this.handleChange } />
-                    <label>password</label>
+                    <label>Password</label>
                     <input type="password" name="password" value={ this.state.password } onChange={ this.handleChange } />
                     <label>Email</label>
                     <input type="text" name="email" value={ this.state.email } onChange={ this.handleChange } />
@@ -77,9 +77,9 @@ class Register extends Component {
                     <input type="text" name="first_name" value={ this.state.first_name } onChange={ this.handleChange } />
                     <label>Last Name</label>
                     <input type="text" name="last_name" value={ this.state.last_name } onChange={ this.handleChange } />
-                    <button onClick={ this.register }>Register</button>
+                    <button onClick={ this.register } className="login-button">Register</button>
                 </form>
-                <button onClick={ this.cancel }>Cancel</button>
+                <button onClick={ this.cancel } className="register-link">Cancel</button>
             </div>
             </>
         )

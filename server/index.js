@@ -23,7 +23,7 @@ const app = express()
 
 // TLMs
 app.use(express.json())
-app.use(cors())
+// app.use(cors())
 app.use(session({
     resave: false,
     saveUninitialized: true,
@@ -69,7 +69,8 @@ app.get('/api/friend/:user_id', friendCtrl.getFriends)
 app.delete('/api/friend/:user_id', friendCtrl.deleteFriend)
 
 // profile endpoints
-app.put('/api/profile/edit/:id', profileCtrl.edit)
+app.put('/api/profile/edit/:id', profileCtrl.editProfile)
+app.get('/api/profile/:username', profileCtrl.getProfile)
 
 // set up app to listen
 app.listen(SERVER_PORT, () => {

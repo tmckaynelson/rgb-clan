@@ -13,9 +13,9 @@ class Profile extends Component {
 
     constructor() {
         super()
-        
+            
         this.state = {
-            games: [1942, 1, 13],
+            games: [],
             username: '',
             first_name: '',
             last_name: '',
@@ -26,13 +26,36 @@ class Profile extends Component {
     }
 
     componentDidMount = () => {
-        this.setState({
-            username: this.props.username,
-            first_name: this.props.first_name,
-            last_name: this.props.last_name,
-            profile_pic: this.props.profile_pic,
-            email: this.props.email,
+
+        axios.get(`/api/profile/${this.props.match.params.username}`)
+        .then( response => {
+            
+            const { username, first_name, last_name, email, profile_pic, user_id } = response.data
+            
+            this.setState({
+                games: [],
+                edit: false,
+                username,
+                first_name, 
+                last_name,
+                email,
+                profile_pic,
+                user_id
+            })
+            this.setGameList('owned')
         })
+        .catch( error => {
+            console.log(error)
+            
+            this.setState({
+                username: '',
+                first_name: '',
+                last_name: '',
+                profile_pic: '',
+                email: ''
+            })
+        })
+        
     }
 
     toggleEdit = (event) => {
@@ -62,13 +85,24 @@ class Profile extends Component {
             })
     }
 
+    setGameList = (list) => {
+
+        axios.get(`/api/game/${this.state.user_id}?list=${list}`)
+            .then( response => {
+                this.setState({
+                    games: response.data
+                })
+            })
+            .catch( error => {
+                console.log(error)
+            })
+    }
+
     render() {
-        console.log(this.state)
-        console.log(this.props)
 
         let mappedGames = this.state.games.map( (element, index) => {
             return (
-                <Game gameID={ element } key={ index } />
+                <Game game={ element } key={ index } />
             )
         })
 
@@ -90,8 +124,10 @@ class Profile extends Component {
                         </form>
                         :
                         <div className="profile">
-                            <img src={ this.props.profile_pic } alt="profile pic"/>
-                            <Edit2 className="edit" onClick={ this.toggleEdit } />
+                            <img src={ this.state.profile_pic } alt="profile pic"/>
+                            {
+                                this.state.user_id === this.props.user_id ? <Edit2 className="edit" onClick={ this.toggleEdit } /> : null
+                            }
                             <h1>{ this.state.username }</h1>
                             <h2>{ this.state.first_name } { this.state.last_name }</h2>
                             <h2>{ this.state.email }</h2>
@@ -99,10 +135,10 @@ class Profile extends Component {
                     }
                     
                     <div className="profile-nav">
-                        <button>want to own</button>
-                        <button>want to play</button>
-                        <button>played</button>
-                        <button>owned</button>
+                        <button onClick={ () => this.setGameList('want_to_own')}>Want to own</button>
+                        <button onClick={ () => this.setGameList('want_to_play')}>Want to play</button>
+                        <button onClick={ () => this.setGameList('played')}>Played</button>
+                        <button onClick={ () => this.setGameList('owned')}>Owned</button>
                     </div>
                     <div>
                         { mappedGames }

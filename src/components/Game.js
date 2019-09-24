@@ -18,6 +18,7 @@ class Game extends Component {
 
     getGame = (id) => {
         axios({
+
             url: this.state.proxyUrl + "https://api-v3.igdb.com/games",
             method: 'POST',
             headers: {
@@ -39,15 +40,23 @@ class Game extends Component {
     }
 
     getCover = () => {
-        axios({
-            url: this.state.proxyUrl + "https://api-v3.igdb.com/covers",
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'user-key': '176d09a31b52b2b83700b8837e12f39b'
-            },
-            data: "fields url; where id = " + this.state.game.cover +";"
-        })
+
+        if(this.state.game.cover === undefined) {
+            this.setState({
+                url: "https://uwosh.edu/facilities/wp-content/uploads/sites/105/2018/09/no-photo.png"
+            })
+        }
+        else {
+
+            axios({
+                url: this.state.proxyUrl + "https://api-v3.igdb.com/covers",
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'user-key': '176d09a31b52b2b83700b8837e12f39b'
+                },
+                data: "fields url; where id = " + this.state.game.cover +";"
+            })
             .then(response => {
                 this.setState({
                     game: {...this.state.game, url: response.data[0].url}
@@ -56,16 +65,17 @@ class Game extends Component {
             .catch(err => {
                 console.error(err);
             });
+        }
     }
 
     componentWillMount = () => {
-        this.getGame(this.props.gameID)
+        this.getGame(this.props.game.game_id)
     }
 
     listOptions = () => {
 
         this.setState({
-            addList: true
+            addList: !this.state.addList
         })
     }
 
@@ -76,7 +86,7 @@ class Game extends Component {
         const body = {
             location,
             user_id: this.props.user_id,
-            game_id: this.props.gameID
+            game_id: this.props.game.id
         }
         
         axios.post('/api/game', body)
@@ -116,7 +126,7 @@ class Game extends Component {
         const body = {
             location,
             title,
-            game_id: this.props.gameID,
+            game_id: this.props.game.id,
             type: 'add_game',
             user_id: this.props.user_id,
             content: null,
@@ -124,7 +134,7 @@ class Game extends Component {
 
         axios.post('/api/posts', body)
             .then( response => {
-                console.log(response)
+
             })
             .catch( error => {
                 console.log(error)
@@ -132,14 +142,23 @@ class Game extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className="game">
-                <img src={ this.state.game.url } />
+                <img src={ this.state.game.url } alt={this.state.game.name} />
                 <div className="info">
                     <p>{ this.state.game.name }</p>
-                    <p> Rating: { Number.parseFloat(this.state.game.rating).toFixed(2) }</p>
-                    <button onClick={ this.listOptions }>Add to list</button>
+                    {
+                        this.state.game.rating ?
+                        <p> Rating: { Number.parseFloat(this.state.game.rating).toFixed(2) }</p>
+                        :
+                        null
+                    }
+                    {
+                        this.state.addList ? 
+                        <button onClick={ this.listOptions }>Cancel</button>
+                        :
+                        <button onClick={ this.listOptions }>Add to list</button>
+                    }
                 </div>
                 {
                     this.state.addList ?

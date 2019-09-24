@@ -46,14 +46,14 @@ class Login extends Component {
         return (
             <>
             <Nav />
-            <div>
+            <div className="container">
                 <form className="login">
                     <label>Username</label>
                     <input type="text" onChange={ this.handleChange } name="username" value={ this.state.username } />
                     <label>Password</label>
                     <input type="password" onChange={ this.handleChange } name="password" value={ this.state.password } />
-                    <button onClick={ this.login }>Login</button>
-                    <Link to="/register">Sign Up</Link>
+                    <button onClick={ this.login } className="login-button">Login</button>
+                    <Link to="/register" className="register-link">Sign Up</Link>
                 </form>
             </div>
             </>

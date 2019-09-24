@@ -18,7 +18,8 @@ const getPostsHome = async (req, res) => {
     */
 
     const db = req.app.get('db')
-    const id = req.session.user.id
+    const id = req.session.user.user_id
+
 
     const posts = await db.get_posts_exclude([id])
 

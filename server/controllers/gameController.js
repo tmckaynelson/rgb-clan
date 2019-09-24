@@ -54,24 +54,35 @@ const getGames = async (req, res) => {
     const { list } = req.query
     let games
 
-    switch(list) {
-        case 'want_to_play':
-            games = await db.get_want_to_play([user_id])
-            break
-        case 'want_to_own':
-            games = await db.get_want_to_own([user_id])
-            break
-        case 'owned':
-            games = await db.get_owned([user_id])
-            break
-        case 'played':
-            games = await db.get_played([user_id])
-            break
-        default:
-            return res.status(404).send('Error adding game')
-    }
+    if(list) {
+        
+        switch(list) {
+            case 'want_to_play':
+                games = await db.get_want_to_play([user_id])
+                break
+            case 'want_to_own':
+                games = await db.get_want_to_own([user_id])
+                break
+            case 'owned':
+                games = await db.get_owned([user_id])
+                break
+            case 'played':
+                games = await db.get_played([user_id])
+                break
+            default:
+                return res.status(404).send('Error adding game')
+        }
 
-    res.status(200).send(games)
+        console.log(games)
+        res.status(200).send(games)
+    }
+    else {
+        games = await db.get_all_games([user_id])
+
+        const uniqueGames = [...new Set(games.map( element => element.game_id))]
+        console.log(uniqueGames)
+        res.status(200).send(uniqueGames)
+    }
 }
 
 const deleteGame = async (req, res) => {

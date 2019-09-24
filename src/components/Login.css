@@ -3,3 +3,33 @@
     flex-direction: column;
     align-items: center;
 }
+
+.login input, button{
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh - 50px;
+}
+
+.login-button {
+    font-size: 14px;
+}
+
+.register-link {
+    text-decoration: none;
+    font-size: 14px;
+    width: 185px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #A85751;
+    /* background-color: #A51C30; */
+    padding: 2px;
+}
+.register-link, .register-link:visited, .register-link:hover, .register-link:link {
+    color: #252525;
+}

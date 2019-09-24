@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function Post() {
+export default function Post(props) {
+    console.log(props)
     return (
         <div>
-            Post
+            <h1>{ props.post.title }</h1>
         </div>
     )
 }

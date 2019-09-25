@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     padding: 15px;
     box-sizing: border-box;
     position: fixed;
@@ -47,19 +47,17 @@
 }
 
 .searchbar {
-    width: 100%;
+    width: 20vw;
     background-color: #ababab;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 5px 0;
-    position: absolute;
-    top: 50px;
 }
 
 .searchbar input {
-    border-radius: 4px;
+    border-radius: 10px;
     border: none;
     width: 80vw;
 }
@@ -76,10 +74,46 @@
 }
 
 .logout {
-    background-color: #252525;
-    color: #ababab;
+    background-color: #ababab;
+    color: #252525;
     margin: 10px auto;
     width: 150px;
+}
+
+.desktop-navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: baseline;
+    width: 20vw;
+}
+
+.desktop-link {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.desktop-link:visited, .desktop-link:link, .desktop-link:hover {
+    color:  #ababab;
+}
+
+.desktop-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+}
+
+.desktop-search input {
+    width: 18vw;
+    /* margin-bottom: 10px; */
+}
+
+.search-search {
+    /* margin-top: 15px; */
+    width: 30px;
+    height: 30px;
 }
 
 .mobile {
@@ -98,5 +132,37 @@
 
     .desktop {
         display: none
+    }
+
+    .searchbar {
+        width: 100%;
+        background-color: #ababab;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 0;
+        position: absolute;
+        top: 50px;
+    }
+
+    .searchbar input {
+        border-radius: 10px;
+        border: none;
+        width: 80vw;
+    }
+
+    .search {
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+        color: #252525;
+    }
+
+    .logout {
+        background-color: #252525;
+        color: #ababab;
+        margin: 10px auto;
+        width: 150px;
     }
 }

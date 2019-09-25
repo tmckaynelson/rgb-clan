@@ -1,3 +1,9 @@
+.profile-container {
+    width: 40vw;
+    margin: auto;
+    padding-top: 60px;
+}
+
 .profile {
     width: 100% -10px;
     min-height: 25vh;
@@ -8,29 +14,25 @@
     padding: 10px;
 }
 
+.profile input {
+    margin-bottom: 10px;
+}
+
 .profile img {
     max-height: 25vh;
-    margin: auto;
 }
 
 .profile-button {
     background-color: #252525;
     color: #ababab;
     outline: none;
+    width: 200px;
 }
 
-.profile-button:active {
-    background-color: #ababab;
-    color: #252525;
-}
-
-.separator {
-    margin: 0;
-}
 
 .verticle-separator {
-    height: 15px;
-    width: 2px;
+    height: 30px;
+    width: 5px;
     background-color: #ababab;
 }
 
@@ -48,8 +50,43 @@
 }
 
 .edit {
-    /* margin-left: 57px; */
-    position: absolute;
-    float: right;
-    right: 5px;
+    right: 30%;
+}
+
+.game-container {
+    width: 100%
+}
+
+@media (max-width: 425px) {
+    
+    .profile-container {
+        width: 100%;
+    }
+
+    .verticle-separator {
+        height: 15px;
+        width: 2px;
+    }
+
+    .profile img {
+        margin: auto;
+    }
+
+    .profile input {
+        margin-bottom: 5px;
+    }
+
+    .edit {
+        position: absolute;
+        float: right;
+        right: 5px;
+    }
+
+    .profile-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 5px;
+        width: 100%;
+    }    
 }

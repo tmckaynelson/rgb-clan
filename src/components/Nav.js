@@ -93,27 +93,39 @@ class Nav extends Component {
                 {
                     // mobile search button
                     this.props.username ?
+                    
                     this.state.searchbar ? <X onClick={ this.toggleSearch } className="hover mobile" /> : <Search onClick={ this.toggleSearch } className="hover mobile" />
                     :
                     null
                 }
 
                 {/* desktop searchbaar */}
-                <div>
-                    <input type="text" />
-                    <Search />
-                </div>
+                {
+                    this.props.username ?
 
+                    <div className="desktop desktop-search">
+                        <input type="text" name="search" value={ this.state.search } onChange={ this.handleChange } />
+                        <Search className="search-search" onClick={ this.search }/>
+                    </div>
+                    :
+                    null
+                }
+                
                 <h1 className="title">Game Tracker</h1>
-
+              
                 {/* desktop nav bar */}
-                <div>
-                    <ul>
-                        <li>Home</li>
-                        <li>Profile</li>
-                        <li>Logout</li>
-                    </ul>
-                </div>
+                {
+                    this.props.username ?
+                    <div className="desktop">
+                        <ul className="desktop-navbar">
+                            <li><Link to="/home" className="desktop-link">Home</Link></li>
+                            <li><Link to={`/profile/${this.props.username}`} className="desktop-link">Profile</Link></li>
+                            <li><button className="logout" onClick={ this.logout }>Logout</button></li>
+                        </ul>
+                    </div>
+                    :
+                    null
+                }
 
                 {
                     // mobile menu

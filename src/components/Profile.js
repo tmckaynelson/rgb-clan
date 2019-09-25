@@ -109,7 +109,7 @@ class Profile extends Component {
         return (
             <>
                 <Nav />
-                <div>
+                <div className="profile-container">
                     {
                         this.state.edit ?
                         // edit profile
@@ -154,8 +154,7 @@ class Profile extends Component {
                         <div className="verticle-separator"></div>
                         <button className="profile-button" onClick={ () => this.setGameList('owned')}>Owned</button>
                     </div>
-                    <hr className="separator"/>
-                    <div>
+                    <div className="game-container">
                         { mappedGames }
                     </div>
                 </div>

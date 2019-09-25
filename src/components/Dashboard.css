@@ -1,0 +1,14 @@
+.dashboard {
+    padding-top: 60px;
+    width: 40vw;
+    margin: auto;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+@media (max-width: 425px) {
+    .dashboard {
+        padding-top: 55px;
+        width: 100%;
+    }
+}

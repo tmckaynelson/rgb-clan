@@ -22,29 +22,30 @@ const createGame = async (req, res) => {
         default:
             return res.status(404).send('Error adding game')
     }
-
     if(foundGame[0]) {
+        
         return res.status(409).send('Game already on list')
     }
 
     switch(location) {
         case 'want_to_play':
             addGame = await db.add_want_to_play([game_id, user_id])
-            break
+            return res.status(200).send('Game added to Want to play')
         case 'want_to_own':
             addGame = await db.add_want_to_own([game_id, user_id])    
-            break
+            return res.status(200).send('Game added to Want to own')
+
         case 'owned':
             addGame = await db.add_owned([game_id, user_id])
-            break
+            return res.status(200).send('Game added to Owned')
+
         case 'played':
             addGame = await db.add_played([game_id, user_id])
-            break
+            return res.status(200).send('Game added to Played')
+
         default:
             return res.status(404).send('Error adding game')
     }
-    return res.status(200).send(addGame[0])
-
 }
 
 const getGames = async (req, res) => {
@@ -73,14 +74,17 @@ const getGames = async (req, res) => {
                 return res.status(404).send('Error adding game')
         }
 
-        console.log(games)
         res.status(200).send(games)
     }
     else {
-        games = await db.get_all_games([user_id])
+        wtp = await db.get_want_to_play([user_id])
+        wto = await db.get_want_to_own([user_id])
+        o = await db.get_owned([user_id])
+        p = await db.get_played([user_id])
+
+        games = [...wtp, ...wto, ...o, ...p]
 
         const uniqueGames = [...new Set(games.map( element => element.game_id))]
-        console.log(uniqueGames)
         res.status(200).send(uniqueGames)
     }
 }

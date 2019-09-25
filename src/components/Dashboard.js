@@ -5,6 +5,8 @@ import axios from 'axios'
 import Game from './Game'
 import Nav from './Nav'
 
+import './Dashboard.css'
+
 class Dashboard extends Component {
 
     constructor() {
@@ -17,7 +19,6 @@ class Dashboard extends Component {
 
     componentDidMount = () => {
 
-        console.log(this.props)
         axios.get(`/api/game/${this.props.user_id}`)
             .then( response => {
                 this.setState({
@@ -38,7 +39,7 @@ class Dashboard extends Component {
         return (
             <>
             <Nav />
-            <div>
+            <div className="dashboard">
                 { mappedGames }
             </div>
             </>

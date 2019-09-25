@@ -10,7 +10,9 @@ class Game extends Component {
         super()
 
         this.state = {
-            game: {},
+            game: {
+                url: 'https://uwosh.edu/facilities/wp-content/uploads/sites/105/2018/09/no-photo.png'
+            },
             proxyUrl: 'https://cors-anywhere.herokuapp.com/',
             addList: false
         }
@@ -28,6 +30,7 @@ class Game extends Component {
             data: "fields name, rating, cover; where id = " + id +";"
           })
             .then(response => {
+                console.log('res', response.data[0])
                 this.setState({
                     game: response.data[0]
                 })
@@ -68,8 +71,14 @@ class Game extends Component {
         }
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
+        // console.log('didid')
         this.getGame(this.props.game.game_id)
+    }
+    componentDidUpdate(prevProps) {
+        if(prevProps.game.game_id !== this.props.game.game_id){
+            this.getGame(this.props.game.game_id)
+        }
     }
 
     listOptions = () => {
@@ -86,11 +95,13 @@ class Game extends Component {
         const body = {
             location,
             user_id: this.props.user_id,
-            game_id: this.props.game.id
+            game_id: this.state.game.id
         }
         
         axios.post('/api/game', body)
             .then( response => {
+
+                alert(response.data)
 
                 this.createPost(location)
                 this.setState({
@@ -98,7 +109,12 @@ class Game extends Component {
                 })
             })
             .catch( error => {
-                console.log(error)
+
+                alert(error.response.data)
+
+                this.setState({
+                    addList: false
+                })
             })
     }
 
@@ -142,6 +158,7 @@ class Game extends Component {
     }
 
     render() {
+        // console.log(this.props.game)
         return (
             <div className="game">
                 <img src={ this.state.game.url } alt={this.state.game.name} />
@@ -162,7 +179,7 @@ class Game extends Component {
                 </div>
                 {
                     this.state.addList ?
-                    <div>
+                    <div className="add">
                         <button name="want_to_play" onClick={ this.addToList } >Want to play</button>
                         <button name="want_to_own" onClick={ this.addToList } >Want to own</button>
                         <button name="played" onClick={ this.addToList } >Played</button>

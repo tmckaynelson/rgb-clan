@@ -4,14 +4,52 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    padding: 5px;
+    align-items: center;
+    padding: 10px;
 }
 
 .profile img {
     max-height: 25vh;
+    margin: auto;
+}
+
+.profile-button {
+    background-color: #252525;
+    color: #ababab;
+    outline: none;
+}
+
+.profile-button:active {
+    background-color: #ababab;
+    color: #252525;
+}
+
+.separator {
+    margin: 0;
+}
+
+.verticle-separator {
+    height: 15px;
+    width: 2px;
+    background-color: #ababab;
+}
+
+.profile-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .edit {
+    /* margin-left: 57px; */
+    position: absolute;
     float: right;
+    right: 5px;
 }

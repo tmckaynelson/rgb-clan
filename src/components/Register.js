@@ -65,7 +65,7 @@ class Register extends Component {
         return (
             <>
             <Nav />
-            <div className="register">
+            <div className="container">
                 <form className="login">
                     <label>Username</label>
                     <input type="text" name="username" value={ this.state.username } onChange={ this.handleChange } />

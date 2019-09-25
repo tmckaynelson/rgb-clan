@@ -112,6 +112,7 @@ class Profile extends Component {
                 <div>
                     {
                         this.state.edit ?
+                        // edit profile
                         <form className="profile">
                             <img src={ this.props.profile_pic } alt="profile pic"/>
                             <input type="text" name="profile_pic" value={ this.state.profile_pic } onChange={ this.handleChange } />
@@ -123,23 +124,37 @@ class Profile extends Component {
                             <button onClick={ this.toggleEdit }>Cancel</button>
                         </form>
                         :
+                        // non edit profile
                         <div className="profile">
-                            <img src={ this.state.profile_pic } alt="profile pic"/>
-                            {
-                                this.state.user_id === this.props.user_id ? <Edit2 className="edit" onClick={ this.toggleEdit } /> : null
-                            }
-                            <h1>{ this.state.username }</h1>
-                            <h2>{ this.state.first_name } { this.state.last_name }</h2>
-                            <h2>{ this.state.email }</h2>
+                            <div>
+                                <img src={ this.state.profile_pic } alt="profile pic"/>
+                                {
+                                    this.state.user_id === this.props.user_id ? <Edit2 className="edit" onClick={ this.toggleEdit } /> : null
+                                }
+                            </div>
+                            <div className="profile-container">
+                                    <h1>{ this.state.username }</h1>
+                                    <h2>{ this.state.first_name } { this.state.last_name }</h2>
+                                    <h2>{ this.state.email }</h2>
+                            </div>
                         </div>
                     }
                     
                     <div className="profile-nav">
-                        <button onClick={ () => this.setGameList('want_to_own')}>Want to own</button>
-                        <button onClick={ () => this.setGameList('want_to_play')}>Want to play</button>
-                        <button onClick={ () => this.setGameList('played')}>Played</button>
-                        <button onClick={ () => this.setGameList('owned')}>Owned</button>
+                        <button
+                            className={"profile-button"} 
+                            onClick={ () => this.setGameList('played')}
+                        >
+                            Played
+                        </button>
+                        <div className="verticle-separator"></div>
+                        <button className="profile-button" onClick={ () => this.setGameList('want_to_own')}>Want to own</button>
+                        <div className="verticle-separator"></div>
+                        <button className="profile-button" onClick={ () => this.setGameList('want_to_play')}>Want to play</button>
+                        <div className="verticle-separator"></div>
+                        <button className="profile-button" onClick={ () => this.setGameList('owned')}>Owned</button>
                     </div>
+                    <hr className="separator"/>
                     <div>
                         { mappedGames }
                     </div>

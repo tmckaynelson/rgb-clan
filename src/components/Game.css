@@ -2,11 +2,41 @@
 .game {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.game img {
+    width: 150px;
+    height: 150px;
 }
 
 .info {
     display: flex;
     flex-direction: column;
+    margin: 5px;
+}
+
+.info p {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.add {
+    position: relative;
+    bottom: 0;
+    z-index: 5;
+}
+
+@media (max-width: 425px) {
+    
+    .game img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .info p {
+        margin-bottom: 5px
+    }
 }

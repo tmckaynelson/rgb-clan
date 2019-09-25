@@ -13,19 +13,33 @@
     font-family: "Turret Road", monospace, sans-serif;
     font-weight: 600;
     border: none;
-    width: 189px;
-    color: #252525;
-    border-radius: 10px
+    border-radius: 20px;
+    font-size: 25px;
 }
 
-
+.app button:hover {
+    cursor: pointer;
+}
 
 .app input {
     border-color: #ababab;
     border-style: solid;
     border-width: 1px;
-    border-radius: 10px;
-    padding: 0 5px;
     background-color: #252525;
     color: #ababab;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+@media (max-width: 425px) {
+
+    .app input {
+        border-radius: 10px;
+        padding: 0 5px;
+    }
+
+    .app button {
+        border-radius: 10px;
+        font-size: 14px;
+    }
 }

@@ -22,13 +22,15 @@ class Nav extends Component {
 
     toggleMenu = () => {
         this.setState({
-            sidebar: !this.state.sidebar
+            sidebar: !this.state.sidebar,
+            searchbar: false
         })
     }
 
     toggleSearch = () => {
         this.setState({
-            searchbar: !this.state.searchbar
+            searchbar: !this.state.searchbar,
+            sidebar: false
         })
     }
 
@@ -86,40 +88,66 @@ class Nav extends Component {
         return (
             <>
             <div className="navbar">
-                {
-                    this.state.sidebar ? 
-                    <div className="sidebar">
-                        <Link to="/home" onClick={ this.toggleMenu } >Home</Link>
-                        <Link to={`/profile/${this.props.username}`} onClick={ this.toggleMenu } >Profile</Link>
-                        <button onClick={ this.logout }>Logout</button>
-                    </div>
-                    :
-                    null
-                }
+                
                 
                 {
+                    // mobile search button
                     this.props.username ?
-                    this.state.searchbar ? <X onClick={ this.toggleSearch } /> : <Search onClick={ this.toggleSearch } />
+                    this.state.searchbar ? <X onClick={ this.toggleSearch } className="hover mobile" /> : <Search onClick={ this.toggleSearch } className="hover mobile" />
                     :
                     null
                 }
+
+                {/* desktop searchbaar */}
+                <div>
+                    <input type="text" />
+                    <Search />
+                </div>
+
                 <h1 className="title">Game Tracker</h1>
+
+                {/* desktop nav bar */}
+                <div>
+                    <ul>
+                        <li>Home</li>
+                        <li>Profile</li>
+                        <li>Logout</li>
+                    </ul>
+                </div>
+
                 {
+                    // mobile menu
                     this.props.username ? 
                     
-                    this.state.sidebar ? <X onClick={ this.toggleMenu } /> : <Menu onClick={ this.toggleMenu } />
+                    this.state.sidebar ? <X onClick={ this.toggleMenu } className="hover mobile" /> : <Menu onClick={ this.toggleMenu } className="hover mobile" />
                     :
                     null
                 }
             </div>
+
             {
+                // mobile search bar
                     this.state.searchbar ?
                     <div className="searchbar">
                         <input type="text" name="search" value={ this.state.search } onChange={ this.handleChange } />
-                        <Search onClick={ this.search } className="search" />
+                        <Search onClick={ this.search } className="search hover" />
                     </div>
                     :
                     null
+            }
+
+{
+                // mobile sidebar
+                this.state.sidebar ? 
+                <div className="sidebar">
+                    <div className="sidebar-links">
+                        <Link to="/home" onClick={ this.toggleMenu } >Home</Link>
+                        <Link to={`/profile/${this.props.username}`} onClick={ this.toggleMenu } >Profile</Link>
+                    </div>
+                    <button onClick={ this.logout } className="logout">Logout</button>
+                </div>
+                :
+                null
             }
             </>
         )

@@ -2,10 +2,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 40vw;
+    min-height: 30vh;
+    font-size: 25px;
 }
 
-.login input, button{
+.login input {
+    font-size: 25px;
+}
+
+.login label {
     margin-bottom: 10px;
+}
+
+.login input, button, a {
+    margin-bottom: 25px;
+    width: 300px;
+    box-sizing: border-box;
 }
 
 .container {
@@ -13,23 +26,48 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh - 50px;
-}
-
-.login-button {
-    font-size: 14px;
+    min-height: 100vh;
+    margin: auto;
+    padding-bottom: 100px;
+    box-sizing: border-box;
+    width: 40vw;
 }
 
 .register-link {
     text-decoration: none;
     font-size: 14px;
-    width: 185px;
-    border-radius: 10px;
     text-align: center;
+    font-size: 25px;
     background-color: #A85751;
-    /* background-color: #A51C30; */
     padding: 2px;
+    border-radius: 20px;
 }
+
 .register-link, .register-link:visited, .register-link:hover, .register-link:link {
     color: #252525;
+}
+
+@media (max-width: 425px) {
+
+    .login input, button, a{
+        margin-bottom: 10px;
+        width: 189px;
+        box-sizing: border-box;
+    }
+
+    .login input {
+        font-size: 14px;
+    }
+
+    .login-button {
+        font-size: 14px;
+        width: 189px;
+    }
+
+    .register-link {
+        width: 189px;
+        padding: 2px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
 }
